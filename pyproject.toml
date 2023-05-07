@@ -1,0 +1,10 @@
+[tool.poetry]
+name = "FreeHeatChallenge"
+version = "0.1.0"
+authors = ["Dmytro Kachurovskyi <mekaa1337@gmail.com>"]
+description = "FreeHeat challenge"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+numpy = "^1.24.3"
+pandas = "^2.0.1"
