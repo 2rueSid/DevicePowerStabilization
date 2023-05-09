@@ -1,25 +1,80 @@
-# Backend Engineer Coding Challenge
-## Description
-You are working for a company which controls electric devices. The company has a pool of 250 devices, each with the
-attributes listed below. All attribute values are fixed for a given device. The company has provided you with a CSV
-containing the attributes of all 250 devices (device_list.csv).
+# FreeHeat Challenge
 
+## Structure:
 ```
-Rated power: 5-15 kW
-Capacity: 60-210 min
-Priority: 1-10 (10 = highest)
+- /src
+-- constants.py
+-- device.py # pydantic model to work with device
+-- interfaces.py # default interfaces
+-- main.py # functions to run program
+-- plot.py # plot generation
+-- process.py # main algorithm to create schedule
+-- utils.py
 ```
 
-Your job is to maximize the combined total electric power of these devices over a period of 4 hours. Since no device has
-enough capacity to run at its rated power for the full duration of 4 hours, you’ll have to implement an algorithm that
-controls when which device runs (=is activated). The resulting list of devices with their respective activation times is
-called a device activation schedule. There are 2 further constraints:
+## How To Setup
 
-1. The combined total electric power has to be kept within a +/-3% bound at all times.
-2. Devices have to be activated for a minimum time of 30 minutes per activation.
+Install dependencies
+```bash
+$ poetry install
+```
 
-Bonus: The devices do not start utilizing power instantly, can’t hold power perfectly at their rated power level, and take
-some time to shut down. We’ve included a time series of a real device that is activated for one hour (power curve, see
-plot below). Please use this power curve to simulate the real-world behavior of each device. Make sure that the simulated
-activated devices also fulfill the 2 constraints listed above. Of course, you’re allowed to modify your previously created
-device activation schedule.
+## How to test
+
+### Run manually
+
+Available start parameters
+```bash
+$ poetry run python3 ./src/main.py -h
+
+usage: main.py [-h] [--basis_percentage BASIS_PERCENTAGE] [--output_format {csv,json}] input_file
+
+Create device schedule from a given device_list.csv file
+
+positional arguments:
+  input_file            Path to the device_list.csv file
+
+options:
+  -h, --help            show this help message and exit
+  --basis_percentage BASIS_PERCENTAGE
+                        The percentage of total power to be used as the basis
+  --output_format {csv,json}
+                        Output file format: 'csv' or 'json'
+```
+Example:
+
+- To create create schedule csv file:
+```bash
+$ poetry run python3 ./src/main.py devices_list.csv --basis_percentage 0.43 --output_format csv
+```
+
+- To create plot base on schedule:
+```bash
+$ poetry run python3 ./src/plot.py
+```
+
+### Run with makefile
+- Create schedule
+```
+$ make run csv
+```
+
+- Create plot
+```
+$ make run create_plot
+```
+
+## Documentation
+
+Basically all the logic is described inside functions.
+
+But need to mention about `basis_percentage` parameter.
+This is a value between `0.0...1 - 1`. This value represent percentage of total `rated_power` of all devices.
+
+It's used to decide hom many devices should be run instantly, and what value will be basic stable total rated power. 
+
+## Future possible improvements and extensions
+- **Data structures optimization**: Using appropriate data structures, such as priority queues, can help reduce the time complexity of certain operations, like sorting and searching.
+- **Parallel processing**: Leverage parallel processing techniques and multi-threading to distribute the workload across multiple cores or processors, allowing the algorithm to handle more devices simultaneously.
+- **Asynchronous processing**: Asynchronous processing can help improve the efficiency of the scheduling algorithm by allowing it to perform multiple tasks concurrently without waiting for each task to complete.
+- **Use efficient algorithms**: Analyze the time complexity of algorithms and replace them with more efficient algorithms if necessary. For example, we can use a more efficient sorting algorithm if the current one becomes a bottleneck at scale.

@@ -1,0 +1,10 @@
+# CONSTRAINTS
+BOUNCE_PERCENTAGE = 0.03
+MINIMUM_PROCESSING_TIME = 30
+TOTAL_DURATION = 240
+
+# LOCAL
+DEVICES_CSV_FILE_PATH = "./devices_list.csv"
+
+# Use as a basis to start some amount of devices
+TOTAL_POWER_BASIS_PERCENTAGE = 0.43
