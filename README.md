@@ -1,4 +1,4 @@
-# FreeHeat Challenge
+# Device Power Stabilization
 
 ## Structure:
 ```
@@ -72,9 +72,3 @@ But need to mention about `basis_percentage` parameter.
 This is a value between `0.0...1 - 1`. This value represent percentage of total `rated_power` of all devices.
 
 It's used to decide hom many devices should be run instantly, and what value will be basic stable total rated power. 
-
-## Future possible improvements and extensions
-- **Data structures optimization**: Using appropriate data structures, such as priority queues, can help reduce the time complexity of certain operations, like sorting and searching.
-- **Parallel processing**: Leverage parallel processing techniques and multi-threading to distribute the workload across multiple cores or processors, allowing the algorithm to handle more devices simultaneously.
-- **Asynchronous processing**: Asynchronous processing can help improve the efficiency of the scheduling algorithm by allowing it to perform multiple tasks concurrently without waiting for each task to complete.
-- **Use efficient algorithms**: Analyze the time complexity of algorithms and replace them with more efficient algorithms if necessary. For example, we can use a more efficient sorting algorithm if the current one becomes a bottleneck at scale.
