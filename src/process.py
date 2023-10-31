@@ -211,32 +211,3 @@ def capacity_enough_for_activation(capacity_left):
 
 def get_device_power_for_minute(device: DeviceI) -> float:
     return device.rated_power
-
-
-# ! Bonus section
-# from utils import get_power_curve
-# start_bounce, golden_era, end_bounce = get_power_curve()
-
-# def get_device_power_for_minute(device: DeviceI) -> float:
-#     device_total_lifetime_seconds = device.capacity * 60
-
-#     device_current_lifetime_seconds = (device.capacity - device.capacity_left) * 60
-
-#     start_bounce_total_seconds = 140
-#     end_bounce_total_seconds = 20
-
-#     if device_current_lifetime_seconds < start_bounce_total_seconds:
-#         return device.rated_power * start_bounce[round(device_current_lifetime_seconds)]
-#     elif (
-#         device_current_lifetime_seconds > start_bounce_total_seconds
-#         and device_current_lifetime_seconds
-#         < device_total_lifetime_seconds - end_bounce_total_seconds
-#     ):
-#         return device.rated_power * random.choice(golden_era)
-#     elif (
-#         device_current_lifetime_seconds
-#         >= device_total_lifetime_seconds - end_bounce_total_seconds
-#     ):
-#         return device.rated_power * random.choice(end_bounce)
-
-#     return device.rated_power
